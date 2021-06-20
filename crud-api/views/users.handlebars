@@ -8,6 +8,7 @@
             <th>Birthday</th>
             <th>Balance</th>
             <th>Email</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,10 @@
                 <td>{{birthday}}</td>
                 <td>{{balance}}</td>
                 <td>{{email}}</td>
+                <td><a href="/users/detail/{{id}}" type="button">Details</a>
+                    <a href="/users/edit/{{id}}">Edit</a>
+                    <a href="/users/delete/{{id}}">Delete</a>
+                </td>
             </tr>
         {{else}}
             <p>No users found.</p>
@@ -26,3 +31,9 @@
         
     </tbody>
 </table>
+
+<style>
+    a {
+        color: black;
+    }
+</style>

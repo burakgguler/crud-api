@@ -5,7 +5,7 @@ const path = require('path');
 
 const dbConnection = require('./config/database')
 dbConnection.authenticate()
-    .then(() => console.log('database successfully connected haha'))
+    .then(() => console.log('database successfully connected'))
     .catch(err => console.log('Unfortunately Error:' + err))
 
 const app = express();
@@ -19,7 +19,7 @@ runtimeOptions: {
 
 app.set('view engine', 'handlebars');
 
-app.use(express.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 

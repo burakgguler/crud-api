@@ -12,13 +12,35 @@ router.get('/', (req, res) =>
             }))
         .catch(err => console.log(err)));
 
+router.get('/detail/:id', async (req, res) => {
+    const user = await User.findByPk(parseInt(req.params.id))
+  
+    if (!user) {
+      return res.status(404).send('User with given id not found')
+    }
+
+    res.render('detail', {
+                id: user.id,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                birthday: user.birthday,
+                balance: user.balance,
+                email: user.email
+    })
+});
+
 router.get('/add', (req, res) => res.render('add'));
 
 router.get('/edit/:id', (req, res) => 
     User.findByPk(parseInt(req.params.id))
         .then(user =>
             res.render('edit', {
-                user
+                id: user.id,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                birthday: user.birthday,
+                balance: user.balance,
+                email: user.email
             }))
         .catch(err => console.log(err)));
 
@@ -45,6 +67,7 @@ router.post('/add', (req, res) => {
     if (errors.length > 0) {
         res.render('add', {
             errors,
+            id,
             first_name,
             last_name,
             birthday,
@@ -64,13 +87,12 @@ router.post('/add', (req, res) => {
     }
 });
 
-router.post('/edit/:id', (req, res) => {
-    User.findByPk(parseInt(req.params.id))
-        .then(user => {
-            if (!user) {
-                return res.status(404).send('User with given id not found');
-            }
-        })
+router.post('/edit/:id', async (req, res) => {
+    const user = await User.findByPk(parseInt(req.params.id))
+  
+    if (!user) {
+      return res.status(404).send('User with given id not found')
+    }
 
     let { first_name, last_name, birthday, balance, email } = req.body;
     let errors = [];
@@ -94,11 +116,12 @@ router.post('/edit/:id', (req, res) => {
     if (errors.length > 0) {
         res.render('edit', {
             errors,
-            first_name,
-            last_name,
-            birthday,
-            balance,
-            email
+            id: user.id,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            birthday: user.birthday,
+            balance: user.balance,
+            email: user.email
         });
     } else {
         user.update({
@@ -111,6 +134,17 @@ router.post('/edit/:id', (req, res) => {
           .then(user => res.redirect('/users'))
           .catch(err => console.log(err));
     }
+});
+
+router.get('/delete/:id', async (req, res) => {
+    const user = await User.findByPk(parseInt(req.params.id))
+  
+    if (!user) {
+      return res.status(404).send('User with given id not found')
+    }
+
+    user.destroy({where: { id: req.params.id}});
+    res.redirect('/users');
 });
 
 module.exports = router;
