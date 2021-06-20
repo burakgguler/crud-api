@@ -1,0 +1,38 @@
+<section id="add" class="container">
+    <div class="form-wrap">
+      <h1>Add A User</h1>
+      {{#each errors}}
+        <div class="error">
+            <p>{{text}}</p>
+        </div>
+      {{/each}}
+      <form action="/users/add" method="POST">
+        <div class="input-group">
+          <label for="first_name">First Name</label>
+          <input type="text" name="first_name" id="first_name" class="input-box" placeholder="User's first name"
+            maxlength="100" value={{first_name}}>
+        </div>
+        <div class="input-group">
+          <label for="last_name">Last Name</label>
+          <input type="text" name="last_name" id="last_name" class="input-box" placeholder="User's last name"
+          maxlength="100" value={{last_name}}>
+        </div>
+        <div class="input-group">
+          <label for="birthday">Birthday</label>
+          <input type="date" name="birthday" id="birthday" class="input-box" placeholder="User's birthday (YYYY-MM-DD)"
+          value={{birthday}}>
+        </div>
+        <div class="input-group">
+          <label for="balance">Balance</label>
+          <input type="text" name="balance" id="balance" class="input-box" placeholder="User's balance"
+          value={{balance}}>
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" class="input-box" placeholder="User's email if exists"
+          value={{email}}>
+        </div>
+        <input type="submit" value="Add User" class="btn btn-reverse">
+      </form>
+    </div>
+  </section>

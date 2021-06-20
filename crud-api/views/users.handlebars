@@ -1,0 +1,28 @@
+<h1>Users List</h1>
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Birthday</th>
+            <th>Balance</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each users}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{first_name}}</td>
+                <td>{{last_name}}</td>
+                <td>{{birthday}}</td>
+                <td>{{balance}}</td>
+                <td>{{email}}</td>
+            </tr>
+        {{else}}
+            <p>No users found.</p>
+        {{/each}}
+        
+    </tbody>
+</table>
