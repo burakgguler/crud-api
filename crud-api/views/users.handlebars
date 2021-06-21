@@ -22,7 +22,9 @@
                 <td>{{email}}</td>
                 <td><a href="/users/detail/{{id}}" type="button">Details</a>
                     <a href="/users/edit/{{id}}">Edit</a>
-                    <a href="/users/delete/{{id}}">Delete</a>
+                    <form action="/users/delete/{{id}}" method="POST">
+                        <button type="submit">Delete</a>
+                    </form>
                 </td>
             </tr>
         {{else}}

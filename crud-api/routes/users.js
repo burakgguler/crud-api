@@ -136,7 +136,7 @@ router.post('/edit/:id', async (req, res) => {
     }
 });
 
-router.get('/delete/:id', async (req, res) => {
+router.post('/delete/:id', async (req, res) => {
     const user = await User.findByPk(parseInt(req.params.id))
   
     if (!user) {
