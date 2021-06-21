@@ -87,7 +87,7 @@ router.post('/add', (req, res) => {
     }
 });
 
-router.post('/edit/:id', async (req, res) => {
+router.post('/edit/:id', async (req, res) => { // should have been put
     const user = await User.findByPk(parseInt(req.params.id))
   
     if (!user) {
@@ -136,7 +136,7 @@ router.post('/edit/:id', async (req, res) => {
     }
 });
 
-router.post('/delete/:id', async (req, res) => {
+router.post('/delete/:id', async (req, res) => { // should have been delete
     const user = await User.findByPk(parseInt(req.params.id))
   
     if (!user) {
